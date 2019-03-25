@@ -34,16 +34,16 @@ public class PlanetController {
 	public PlanetController(PlanetService service) {
 		this.service = service;
 	}
-
-	@GetMapping
-	public Flux<Planet> getAllProducts() {
-		return service.getAllPlanets();
-	}
-
+	
 	@GetMapping("/starwars")
 	public Mono<ResponseEntity<StarWarsModel>> getStarWarsPlanets(@RequestParam(value="page", defaultValue="1") int page) {
 		return service.getStarWarPlanets(page).map(planet -> ResponseEntity.ok(planet))
 				.defaultIfEmpty(ResponseEntity.notFound().build());
+	}
+
+	@GetMapping
+	public Flux<Planet> getAllPlanets() {
+		return service.getAllPlanets();
 	}
 
 	@GetMapping("{id}")
@@ -52,16 +52,16 @@ public class PlanetController {
 				.defaultIfEmpty(ResponseEntity.notFound().build());
 	}
 	
-	@DeleteMapping("{id}")
-	public Mono<Object> deletePlanet(@PathVariable String id) {
-		return service.deletePlanet(id).map(m -> ResponseEntity.status(204).build());
-		
-	}
-
 	@GetMapping("/name/{name}")
 	public Mono<ResponseEntity<Planet>> getPlanetByName(@PathVariable String name) {
 		return service.getPlanetByName(name).map(planet -> ResponseEntity.ok(planet))
 				.defaultIfEmpty(ResponseEntity.notFound().build());
+	}
+	
+	@DeleteMapping("{id}")
+	public Mono<Object> deletePlanet(@PathVariable String id) {
+		return service.deletePlanet(id).map(m -> ResponseEntity.status(204).build());
+		
 	}
 
 	@PostMapping
