@@ -1,5 +1,5 @@
 # swapi-client
-
+<b>REACTIVE API WITH EMBEDDED MONGODB</b></br></br>
 <b>GET</b> -    /planets/starwars?page=  -> returns a paginated list of planets in the swapi </br>
 <b>GET</b> -    /planets                 -> returns a list with all planets </br>
 <b>GET</b> -    /planets/{id}            -> return a planet by id </br>
